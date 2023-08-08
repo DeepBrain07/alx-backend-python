@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ This module defines a python function """
 import asyncio
-import typing
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
