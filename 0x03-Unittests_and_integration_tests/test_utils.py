@@ -2,9 +2,9 @@
 """ This module defines a test class
 """
 import unittest
+from unittest.mock import Mock, patch
 from parameterized import parameterized
 from utils import access_nested_map, get_json, memoize
-import utils
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -45,7 +45,7 @@ class TestGetJson(unittest.TestCase):
         """ Tests 'get_json' function
         """
         with unittest.mock.patch('utils.requests.get') as mock_get:
-            mock_response = unittest.mock.Mock()
+            mock_response = Mock()
             mock_response.json.return_value = res
             mock_get.return_value = mock_response
             data = get_json(arg)
@@ -75,7 +75,7 @@ class TestMemoize(unittest.TestCase):
                 return self.a_method()
 
         obj = TestClass()
-        with unittest.mock.patch.object(obj, 'a_method') as mocked_method:
+        with patch.object(obj, 'a_method') as mocked_method:
             mocked_method.return_value = 42
             d = obj.a_property
             c = obj.a_property
