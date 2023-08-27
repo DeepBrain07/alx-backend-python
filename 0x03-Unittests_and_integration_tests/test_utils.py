@@ -45,7 +45,7 @@ class TestGetJson(unittest.TestCase):
         """ Tests 'get_json' function
         """
         with unittest.mock.patch('utils.requests.get') as mock_get:
-            mock_response = unittest.mock.MagicMock()
+            mock_response = unittest.mock.Mock()
             mock_response.json.return_value = res
             mock_get.return_value = mock_response
             data = get_json(arg)
