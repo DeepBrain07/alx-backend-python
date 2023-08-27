@@ -21,7 +21,7 @@ __all__ = [
 def access_nested_map(nested_map: Mapping, path: Sequence) -> Any:
     """Access nested map with key path.
     Parameters
-    ----------
+        ----------
     nested_map: Mapping
         A nested map
     path: Sequence
