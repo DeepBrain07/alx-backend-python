@@ -84,10 +84,10 @@ class TestMemoize(unittest.TestCase):
 
         with unittest.mock.patch('test_utils.TestMemoize') as mocked_method:
             mocked_method = TestClass.a_method = unittest.mock.Mock()
+            mocked_method.return_value = 42
             data = TestClass()
-            # d = data.a_property()
-            # c = data.a_property()
-            # d = data.a_property()
-            # e = data.a_property()
-            # print(data.a_method.call_count)
+            d = data.a_property
+            c = data.a_property
+            self.assertEqual(d, 42)
+            self.assertEqual(c, 42)
             data.a_method.assert_called_once()
