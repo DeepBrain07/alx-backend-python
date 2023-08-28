@@ -2,7 +2,7 @@
 """ This module defines a test class
 """
 import unittest
-from unittest.mock import patch, Mock
+from unittest.mock import patch, Mock, PropertyMock
 from utils import get_json
 from client import GithubOrgClient
 import client
@@ -30,3 +30,14 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(data, {})
         mock_get.assert_called_with(f'https://api.github.com/orgs/{arg}')
         mock_get.assert_called_once()
+
+    def test_public_repos_url(self):
+        """ Tests the '_public_repos_url' property
+        """
+        obj = GithubOrgClient('abc')
+        with patch.object(GithubOrgClient, 'org', new_callable=PropertyMock)\
+                as mock_method:
+            mock_method.return_value = \
+                {'name': 'abc', 'repos_url': 'http://repost.url.com'}
+            repos_url = obj._public_repos_url
+            self.assertEqual(repos_url, mock_method.return_value['repos_url'])
